@@ -525,7 +525,7 @@ AddModule("Plugins", function()
     function Plugins:Community()
         local Community = Plugins:NewPage({ "Community", "Join our community", 115960025411300 }) do
             Community:Section("Community") do
-                local Discord = Community:Input({ Value = "https://discord.gg/JXgCz6uC2U" }) do
+                local Discord = Community:Input({ Value = "https://discord.gg/deltax" }) do
                     Discord.TextEditable = false
                     Discord.Interactable = false
                     Discord.ClearTextOnFocus = false 

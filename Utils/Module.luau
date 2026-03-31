@@ -161,7 +161,7 @@ AddModule("Asset", function()
 
     do
         if not isfile("Q613L20.png") then
-            Asset:Download("https://raw.githubusercontent.com/natoppo044/natoppo044/main/assets/xova.png", "Q613L20.png") 
+            Asset:Download("https://raw.githubusercontent.com/natoppo044/GG/main/assets/xova.png", "Q613L20.png") 
         end
     end
 
