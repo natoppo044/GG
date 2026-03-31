@@ -26,20 +26,21 @@ function Library:Create(Class, Properties)
     return Creations
 end
 
-function Library:Draggable(a)
+function Library:Draggable(a, target)
     local Dragging, DragInput, DragStart, StartPosition = nil, nil, nil, nil
+    local MoveTarget = target or a
 
     local function Update(input)
         local Delta = input.Position - DragStart
         local pos = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
-        TweenService:Create(a, TweenInfo.new(0.3), {Position = pos}):Play()
+        TweenService:Create(MoveTarget, TweenInfo.new(0.3), {Position = pos}):Play()
     end
 
     a.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             Dragging = true
             DragStart = input.Position
-            StartPosition = a.Position
+            StartPosition = MoveTarget.Position
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     Dragging = false
@@ -2245,6 +2246,7 @@ function Library:Window(Args)
             end)
 
             Library:Draggable(Pillow_1)
+            Library:Draggable(LogoButton, Pillow_1)
             
             LogoButton.MouseButton1Click:Connect(function()
                 Background_1.Visible = not Background_1.Visible
