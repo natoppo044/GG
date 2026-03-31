@@ -2190,22 +2190,63 @@ function Library:Window(Args)
                 CornerRadius = UDim.new(1, 0)
             })
 
-            Library:Create("ImageLabel", {
+            local LogoButton = Library:Create("ImageButton", {
                 Name = "Logo",
                 Parent = Pillow_1,
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                 BackgroundTransparency = 1,
                 BorderSizePixel = 0,
+                AutoButtonColor = false,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 Size = UDim2.new(0.9, 0, 0.9, 0),
                 Image = Library:Asset(136171554785654),
                 ScaleType = Enum.ScaleType.Fit
             })
 
+            local LogoShadow = Library:Create("ImageLabel", {
+                Name = "LogoShadow",
+                Parent = Pillow_1,
+                AnchorPoint = Vector2.new(0.5, 0.5),
+                BackgroundTransparency = 1,
+                Position = UDim2.new(0.5, 0, 0.5, 0),
+                Size = UDim2.new(1.05, 0, 1.05, 0),
+                ZIndex = 0,
+                Image = "rbxassetid://8992230677",
+                ImageColor3 = Color3.fromRGB(0, 0, 0),
+                ImageTransparency = 0.8,
+                ScaleType = Enum.ScaleType.Slice,
+                SliceCenter = Rect.new(99, 99, 99, 99)
+            })
+
+            LogoButton.ZIndex = 1
+
+            local function Press()
+                Library:Tween({ v = LogoButton, t = 0.1, s = "Back", d = "Out", g = { Size = UDim2.new(0.86, 0, 0.86, 0) } }):Play()
+                Library:Tween({ v = LogoShadow, t = 0.1, s = "Exponential", d = "Out", g = { ImageTransparency = 0.65, Size = UDim2.new(1.1, 0, 1.1, 0) } }):Play()
+            end
+
+            local function Release()
+                Library:Tween({ v = LogoButton, t = 0.12, s = "Back", d = "Out", g = { Size = UDim2.new(0.9, 0, 0.9, 0) } }):Play()
+                Library:Tween({ v = LogoShadow, t = 0.12, s = "Exponential", d = "Out", g = { ImageTransparency = 0.8, Size = UDim2.new(1.05, 0, 1.05, 0) } }):Play()
+            end
+
+            LogoButton.MouseButton1Down:Connect(Press)
+            LogoButton.MouseButton1Up:Connect(Release)
+            LogoButton.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.Touch then
+                    Press()
+                end
+            end)
+            LogoButton.InputEnded:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.Touch then
+                    Release()
+                end
+            end)
+
             Library:Draggable(Pillow_1)
             
-            Pillow_1.MouseButton1Click:Connect(function()
+            LogoButton.MouseButton1Click:Connect(function()
                 Background_1.Visible = not Background_1.Visible
             end)
             
