@@ -8,8 +8,8 @@ return(function(Installer)
         Enemies = {}
     }
 
-    local Owner = "vita6it"
-    local Repository = "Antigravity"
+    local Owner = "GG"
+    local Repository = "natoppo044"
 
     local Configuration = Installer.Configurations
     local Settings = Installer.Settings
@@ -2214,7 +2214,7 @@ return(function(Installer)
                             return Log(
                                 403,
                                 "Access denied - PlayerGui:Destroy()",
-                                "PlayerGui was locked by Antigravity."
+                                "PlayerGui was locked by natoppo044."
                             )
                         end
                     end
