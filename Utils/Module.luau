@@ -542,7 +542,7 @@ AddModule("Plugins", function()
     end
     
     function Plugins:Managers()
-        local Managers = Plugins:NewPage({ "Managers", "Managers Options", 134261589888025 }) do
+        local Managers = Plugins:NewPage({ "จัดการเซิฟเวอร์", "Managers Options", 134261589888025 }) do
             
             Managers:Section("Server") do
                 Configurations:Default("JobId", JobId)
