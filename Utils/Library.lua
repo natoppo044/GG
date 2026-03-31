@@ -122,13 +122,29 @@ function Library.Effect(c, p)
 end
 
 function Library:Asset(rbx)
-    if typeof(rbx) == 'number' then
-        return "rbxassetid://" .. rbx
-    end
-    if typeof(rbx) == 'string' and rbx:find('rbxassetid://') then
+    local id
+    if typeof(rbx) == "number" then
+        id = "rbxassetid://" .. rbx
+    elseif typeof(rbx) == "string" and rbx:find("rbxassetid://") then
+        id = rbx
+    else
         return rbx
     end
-    return rbx
+    local ok, objs = pcall(game.GetObjects, game, id)
+    if ok and objs and objs[1] then
+        local inst = objs[1]
+        if inst and inst:IsA("Decal") and inst.Texture and inst.Texture ~= "" then
+            return inst.Texture
+        end
+        local d = inst and inst.FindFirstChildOfClass and inst:FindFirstChildOfClass("Decal")
+        if d and d.Texture and d.Texture ~= "" then
+            return d.Texture
+        end
+        if inst and (inst:IsA("ImageLabel") or inst:IsA("ImageButton")) and inst.Image and inst.Image ~= "" then
+            return inst.Image
+        end
+    end
+    return id
 end
 
 function Library:NewRows(Parent, Title, Desciption)
@@ -2181,8 +2197,9 @@ function Library:Window(Args)
                 BackgroundTransparency = 1,
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
-                Size = UDim2.new(0.5, 0, 0.5, 0),
-                Image = "rbxassetid://136171554785654"
+                Size = UDim2.new(0.6, 0, 0.6, 0),
+                Image = Library:Asset(136171554785654),
+                ScaleType = Enum.ScaleType.Fit
             })
 
             Library:Draggable(Pillow_1)
