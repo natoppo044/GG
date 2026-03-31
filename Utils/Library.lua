@@ -2181,7 +2181,7 @@ function Library:Window(Args)
                 BackgroundTransparency = 1,
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.06, 0, 0.15, 0),
-                Size = UDim2.new(0, 256, 0, 256),
+                Size = UDim2.new(0, 150, 0, 150),
                 Text = ""
             })
 
