@@ -33,7 +33,7 @@ function Library:Draggable(a, target)
     local function Update(input)
         local Delta = input.Position - DragStart
         local pos = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
-        TweenService:Create(MoveTarget, TweenInfo.new(0.3), {Position = pos}):Play()
+        MoveTarget.Position = pos
     end
 
     a.InputBegan:Connect(function(input)
