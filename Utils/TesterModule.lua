@@ -5,8 +5,8 @@ local Settings = {}
 local Threads = {}
 local Fallback = {}
 
-local Owner = "GG"
-local Repository = "natoppo044"
+local Owner = "natoppo044"
+local Repository = "GG"
 
 local function fetch(file)
     local URL = string.format(
@@ -65,7 +65,7 @@ end)
 
 AddModule("Configurations", function()
     local Configurations = {}
-    local Files = "natoppo044"
+    local Files = "GG"
 
     local makefolder = makefolder or function( ... ) return ... end
     local writefile = writefile or function( ... ) return ... end
@@ -75,7 +75,7 @@ AddModule("Configurations", function()
 
     Configurations.FullPaths = `{Configurations.Set}/{PlaceId}.json`
     Configurations.Paths = { Files, Configurations.Set }
-    Configurations.Files = Files or "natoppo044"
+    Configurations.Files = Files or "GG"
     Configurations.Set = `{Files}/settings`
 
     do
@@ -161,7 +161,7 @@ AddModule("Asset", function()
 
     do
         if not isfile("Q613L20.png") then
-            Asset:Download("https://raw.githubusercontent.com/GG/natoppo044/main/assets/xova.png", "Q613L20.png") 
+            Asset:Download("https://raw.githubusercontent.com/natoppo044/GG/main/assets/xova.png", "Q613L20.png") 
         end
     end
 
@@ -301,13 +301,13 @@ AddModule("Parallels", function()
 
                 task.delay(3, function()
                     if _ENV.error_message then
-                        _ENV.error_message.Text = "- natoppo044 Model -\nStart Refresh Options ..."
+                        _ENV.error_message.Text = "- GG Model -\nStart Refresh Options ..."
 
                         task.wait(2)
 
                         if _ENV.RunningOption and Fallback[_ENV.RunningOption] then
                             Fallback[_ENV.RunningOption].Value = false
-                            _ENV.error_message.Text = "- natoppo044 Model -\nHas been Disabled " .. _ENV.RunningOption
+                            _ENV.error_message.Text = "- GG Model -\nHas been Disabled " .. _ENV.RunningOption
                         end
 
                         task.wait(2)

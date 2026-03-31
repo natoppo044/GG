@@ -5,7 +5,7 @@ local Settings = {}
 local Threads = {}
 local Fallback = {}
 
-local Owner = "GG"
+local Owner = "natoppo044"
 local Repository = "natoppo044"
 
 local function fetch(file)
@@ -161,7 +161,7 @@ AddModule("Asset", function()
 
     do
         if not isfile("Q613L20.png") then
-            Asset:Download("https://raw.githubusercontent.com/GG/natoppo044/main/assets/xova.png", "Q613L20.png") 
+            Asset:Download("https://raw.githubusercontent.com/natoppo044/natoppo044/main/assets/xova.png", "Q613L20.png") 
         end
     end
 
