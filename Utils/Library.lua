@@ -776,7 +776,7 @@ function Library:Window(Args)
             Font = Enum.Font.GothamBold,
             RichText = true,
             Text = Title,
-        TextColor3 = Color3.fromRGB(0, 120, 255),
+        TextColor3 = Color3.fromRGB(255, 255, 255),
             TextSize = 15,
             TextStrokeTransparency = 0.449999988079071,
             TextXAlignment = Enum.TextXAlignment.Left
