@@ -2178,9 +2178,10 @@ function Library:Window(Args)
                 Name = "Pillow",
                 Parent = ToggleScreen,
                 BackgroundColor3 = Color3.fromRGB(11, 11, 11),
+                BackgroundTransparency = 1,
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.06, 0, 0.15, 0),
-                Size = UDim2.new(0, 50, 0, 50),
+                Size = UDim2.new(0, 256, 0, 256),
                 Text = ""
             })
 
@@ -2197,7 +2198,7 @@ function Library:Window(Args)
                 BackgroundTransparency = 1,
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
-                Size = UDim2.new(0.6, 0, 0.6, 0),
+                Size = UDim2.new(0.9, 0, 0.9, 0),
                 Image = Library:Asset(136171554785654),
                 ScaleType = Enum.ScaleType.Fit
             })
