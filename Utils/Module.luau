@@ -6,7 +6,7 @@ local Threads = {}
 local Fallback = {}
 
 local Owner = "natoppo044"
-local Repository = "natoppo044"
+local Repository = "GG"
 
 local function fetch(file)
     local URL = string.format(
