@@ -600,7 +600,7 @@ function Library:Window(Args)
     
 
     -- Scale (body)
-    local Scale_1 = Library:Create("CanvasGroup", {
+    local Scale_1 = Library:Create("Frame", {
         Name = "Scale",
         Parent = Background_1,
         AnchorPoint = Vector2.new(0, 1),
@@ -609,8 +609,7 @@ function Library:Window(Args)
         BorderColor3 = Color3.fromRGB(0, 0, 0),
         BorderSizePixel = 0,
         Position = UDim2.new(0, 0, 1, 0),
-        Size = UDim2.new(1, 0, 1, -40),
-        GroupTransparency = 0
+        Size = UDim2.new(1, 0, 1, -40)
     })
 
     local Home_1 = Library:Create("Frame", {
@@ -674,21 +673,8 @@ function Library:Window(Args)
     end)
 
     local PageService: UIPageLayout = Library:Create("UIPageLayout", {
-        Parent = Scale_1,
-        Animated = false
+        Parent = Scale_1
     })
-
-    local function FadePage(targetPage)
-        local FadeTweenOut = TweenService:Create(Scale_1, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {GroupTransparency = 1})
-        local FadeTweenIn = TweenService:Create(Scale_1, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {GroupTransparency = 0})
-        
-        FadeTweenOut:Play()
-        FadeTweenOut.Completed:Once(function()
-            PageService:JumpTo(targetPage)
-            task.wait(0.05) -- ให้เวลาระบบจัดการ layout แป๊บเดียว
-            FadeTweenIn:Play()
-        end)
-    end
 
     local Window = {}
 
@@ -914,7 +900,7 @@ function Library:Window(Args)
 
             Return_1.Visible = true
 
-            FadePage(NewPage)
+            PageService:JumpTo(NewPage)
         end
 
         local Page = {}
@@ -2158,12 +2144,12 @@ function Library:Window(Args)
         Library:Draggable(Background_1) 
 
         PageService.HorizontalAlignment = Enum.HorizontalAlignment.Left
+        PageService.EasingStyle = Enum.EasingStyle.Exponential
+        PageService.TweenTime = 0.5
         
         PageService.GamepadInputEnabled = false
         PageService.ScrollWheelInputEnabled = false
         PageService.TouchInputEnabled = false
-        PageService.Animated = false
-        PageService.TweenTime = 0
         
         Library.PageService = PageService
 
@@ -2184,7 +2170,7 @@ function Library:Window(Args)
                 }
             }):Play()
 
-            FadePage(Home_1)
+            PageService:JumpTo(Home_1)
         end
         
         do
