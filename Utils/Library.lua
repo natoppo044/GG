@@ -152,7 +152,7 @@ function Library:NewRows(Parent, Title, Desciption)
     local Rows = Library:Create("Frame", {
         Name = "Rows",
         Parent = Parent,
-        BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+        BackgroundColor3 = Color3.fromRGB(10, 11, 14),
         BorderColor3 = Color3.fromRGB(0, 0, 0),
         BorderSizePixel = 0,
         Size = UDim2.new(1, 0, 0, 40)
@@ -686,7 +686,7 @@ function Library:Window(Args)
         local NewTabs = Library:Create("Frame", {
             Name = "NewTabs",
             Parent = MainTabsScrolling,
-            BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+            BackgroundColor3 = Color3.fromRGB(10, 11, 14),
             BorderColor3 = Color3.fromRGB(0, 0, 0),
             BorderSizePixel = 0,
             Size = UDim2.new(0, 230, 0, 55)
@@ -1118,7 +1118,7 @@ function Library:Window(Args)
             local Background = Library:Create("Frame", {
                 Name = "Background",
                 Parent = Right,
-                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+                BackgroundColor3 = Color3.fromRGB(10, 11, 14),
                 BorderColor3 = Color3.fromRGB(0, 0, 0),
                 BorderSizePixel = 0,
                 Size = UDim2.new(0, 20, 0, 20)
@@ -1243,7 +1243,7 @@ function Library:Window(Args)
             local Slider_1 = Library:Create("Frame", {
                 Name = "Slider",
                 Parent = PageScrolling_1,
-                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+                BackgroundColor3 = Color3.fromRGB(10, 11, 14),
                 BackgroundTransparency = 0,
                 BorderSizePixel = 0,
                 Size = UDim2.new(1, 0, 0, 42),
@@ -1346,7 +1346,7 @@ function Library:Window(Args)
                 Name = "ColorBar",
                 Parent = Slide_1,
                 AnchorPoint = Vector2.new(0.5, 0.5),
-                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+                BackgroundColor3 = Color3.fromRGB(10, 11, 14),
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 Size = UDim2.new(1, 0, 0, 5),
@@ -1539,7 +1539,7 @@ function Library:Window(Args)
             local Front_1 = Library:Create("Frame", {
                 Name = "Front",
                 Parent = Input_1,
-                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+                BackgroundColor3 = Color3.fromRGB(10, 11, 14),
                 BorderSizePixel = 0,
                 Size = UDim2.new(1, -35, 1, 0),
                 Selectable = false
@@ -1807,7 +1807,7 @@ function Library:Window(Args)
                 local Front_1 = Library:Create("Frame", {
                     Name = "Front",
                     Parent = Input_1,
-                    BackgroundColor3 = Color3.fromRGB(26, 29, 36),
+                    BackgroundColor3 = Color3.fromRGB(10, 11, 14),
                     BorderSizePixel = 0,
                     Size = UDim2.new(1, 0, 1, 0),
                     ZIndex = 500,
