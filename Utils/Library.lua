@@ -289,10 +289,9 @@ function Library:NewRows(Parent, Title, Desciption)
         Font = Enum.Font.GothamMedium,
         RichText = true,
         Text = Desciption,
-        TextColor3 = Color3.fromRGB(255, 255, 255),
+        TextColor3 = Color3.fromRGB(160, 164, 174),
         TextSize = 10,
         TextStrokeTransparency = 0.699999988079071,
-        TextTransparency = 0.6,
         TextXAlignment = Enum.TextXAlignment.Left
     })
 
@@ -481,10 +480,9 @@ function Library:Window(Args)
         Font = Enum.Font.GothamMedium,
         RichText = true,
         Text = SubTitle,
-        TextColor3 = Color3.fromRGB(255, 255, 255),
+        TextColor3 = Color3.fromRGB(160, 164, 174),
         TextSize = 10,
         TextStrokeTransparency = 0.699999988079071,
-        TextTransparency = 0.6,
         TextXAlignment = Enum.TextXAlignment.Left
     })
 
@@ -564,7 +562,7 @@ function Library:Window(Args)
         Font = Enum.Font.GothamSemibold,
         RichText = true,
         Text = "Expires at",
-        TextColor3 = Color3.fromRGB(0, 120, 255),
+        TextColor3 = Color3.fromRGB(229, 192, 123),
         TextSize = 13,
         TextStrokeTransparency = 0.699999988079071,
         TextXAlignment = Enum.TextXAlignment.Right
@@ -593,10 +591,9 @@ function Library:Window(Args)
         Font = Enum.Font.GothamMedium,
         RichText = true,
         Text = "00:00:00 Hours",
-        TextColor3 = Color3.fromRGB(255, 255, 255),
+        TextColor3 = Color3.fromRGB(160, 164, 174),
         TextSize = 10,
         TextStrokeTransparency = 0.699999988079071,
-        TextTransparency = 0.6,
         TextXAlignment = Enum.TextXAlignment.Right
     })
     
@@ -689,7 +686,7 @@ function Library:Window(Args)
         local NewTabs = Library:Create("Frame", {
             Name = "NewTabs",
             Parent = MainTabsScrolling,
-            BackgroundColor3 = Color3.fromRGB(10, 10, 10),
+            BackgroundColor3 = Color3.fromRGB(26, 29, 36),
             BorderColor3 = Color3.fromRGB(0, 0, 0),
             BorderSizePixel = 0,
             Size = UDim2.new(0, 230, 0, 55)
@@ -962,7 +959,7 @@ function Library:Window(Args)
                 Position = UDim2.new(0, 0.5, 0.5, 1),
                 Size = UDim2.new(0, 20, 0, 20),
                 Image = Library:Asset(Icon),
-                ImageColor3 = Color3.fromRGB(0, 120, 255),
+                ImageColor3 = Color3.fromRGB(229, 192, 123),
             })
 
             Library:Create("UIGradient", {
@@ -1052,7 +1049,7 @@ function Library:Window(Args)
             local Button = Library:Create("Frame", {
                 Name = "Button",
                 Parent = Right,
-                BackgroundColor3 = Color3.fromRGB(0, 120, 255),
+                BackgroundColor3 = Color3.fromRGB(229, 192, 123),
                 BorderColor3 = Color3.fromRGB(0, 0, 0),
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.730158806, 0, 0.166666672, 0),
@@ -1121,7 +1118,7 @@ function Library:Window(Args)
             local Background = Library:Create("Frame", {
                 Name = "Background",
                 Parent = Right,
-                BackgroundColor3 = Color3.fromRGB(10, 10, 10),
+                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
                 BorderColor3 = Color3.fromRGB(0, 0, 0),
                 BorderSizePixel = 0,
                 Size = UDim2.new(0, 20, 0, 20)
@@ -1142,7 +1139,7 @@ function Library:Window(Args)
                 Name = "Highligh",
                 Parent = Background,
                 AnchorPoint = Vector2.new(0.5, 0.5),
-                BackgroundColor3 = Color3.fromRGB(0, 120, 255),
+                BackgroundColor3 = Color3.fromRGB(229, 192, 123),
                 BorderColor3 = Color3.fromRGB(0, 0, 0),
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -1188,7 +1185,7 @@ function Library:Window(Args)
                     Callback(Data.Value)
 
                     ImageLabel_1.Size = UDim2.new(0.85, 0, 0.85, 0)
-                    TitleLabel.TextColor3 = Color3.fromRGB(0, 120, 255)
+                    TitleLabel.TextColor3 = Color3.fromRGB(229, 192, 123)
 
                     Library:Tween({ v = Highligh_1, t = 0.5, s = "Exponential", d = "Out", g = { BackgroundTransparency = 0 } }):Play()
                     Library:Tween({ v = ImageLabel_1, t = 0.5, s = "Exponential", d = "Out", g = { ImageTransparency = 0 } }):Play()
@@ -1246,7 +1243,7 @@ function Library:Window(Args)
             local Slider_1 = Library:Create("Frame", {
                 Name = "Slider",
                 Parent = PageScrolling_1,
-                BackgroundColor3 = Color3.fromRGB(15, 15, 15),
+                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
                 BackgroundTransparency = 0,
                 BorderSizePixel = 0,
                 Size = UDim2.new(1, 0, 0, 42),
@@ -1349,7 +1346,7 @@ function Library:Window(Args)
                 Name = "ColorBar",
                 Parent = Slide_1,
                 AnchorPoint = Vector2.new(0.5, 0.5),
-                BackgroundColor3 = Color3.fromRGB(10, 10, 10),
+                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
                 BorderSizePixel = 0,
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 Size = UDim2.new(1, 0, 0, 5),
@@ -1364,7 +1361,7 @@ function Library:Window(Args)
             local ColorBar_2 = Library:Create("Frame", {
                 Name = "ColorBar",
                 Parent = ColorBar_1,
-                BackgroundColor3 = Color3.fromRGB(0, 120, 255),
+                BackgroundColor3 = Color3.fromRGB(229, 192, 123),
                 BorderSizePixel = 0,
                 Size = UDim2.new(0, 0, 1, 0),
                 Selectable = false
@@ -1415,7 +1412,7 @@ function Library:Window(Args)
                 TextXAlignment = Enum.TextXAlignment.Right
             })
 
-            local accent  = Color3.fromRGB(0, 120, 255)
+            local accent  = Color3.fromRGB(229, 192, 123)
             local white = Color3.fromRGB(255, 255, 255)
             local dragging = false
 
@@ -1542,7 +1539,7 @@ function Library:Window(Args)
             local Front_1 = Library:Create("Frame", {
                 Name = "Front",
                 Parent = Input_1,
-                BackgroundColor3 = Color3.fromRGB(15, 15, 15),
+                BackgroundColor3 = Color3.fromRGB(26, 29, 36),
                 BorderSizePixel = 0,
                 Size = UDim2.new(1, -35, 1, 0),
                 Selectable = false
@@ -1579,7 +1576,7 @@ function Library:Window(Args)
             local Enter_1 = Library:Create("Frame", {
                 Name = "Enter",
                 Parent = Input_1,
-                BackgroundColor3 = Color3.fromRGB(0, 120, 255),
+                BackgroundColor3 = Color3.fromRGB(229, 192, 123),
                 BorderSizePixel = 0,
                 Size = UDim2.new(0, 30, 0, 30),
                 Selectable = false
@@ -1749,7 +1746,7 @@ function Library:Window(Args)
                     Font = Enum.Font.GothamSemibold,
                     RichText = true,
                     Text = Title,
-                    TextColor3 = Color3.fromRGB(0, 120, 255),
+                    TextColor3 = Color3.fromRGB(229, 192, 123),
                     TextSize = 14,
                     TextStrokeTransparency = 0.699999988079071,
                     TextXAlignment = Enum.TextXAlignment.Left
@@ -1810,7 +1807,7 @@ function Library:Window(Args)
                 local Front_1 = Library:Create("Frame", {
                     Name = "Front",
                     Parent = Input_1,
-                    BackgroundColor3 = Color3.fromRGB(15, 15, 15),
+                    BackgroundColor3 = Color3.fromRGB(26, 29, 36),
                     BorderSizePixel = 0,
                     Size = UDim2.new(1, 0, 1, 0),
                     ZIndex = 500,
@@ -2000,7 +1997,7 @@ function Library:Window(Args)
                     })
 
                     local function OnValue(value)
-                        Title_2.TextColor3 = value and Color3.fromRGB(0, 120, 255) or Color3.fromRGB(255, 255, 255)
+                        Title_2.TextColor3 = value and Color3.fromRGB(229, 192, 123) or Color3.fromRGB(255, 255, 255)
 
                         if value then
                             Library:Tween({
