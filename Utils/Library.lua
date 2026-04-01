@@ -673,7 +673,10 @@ function Library:Window(Args)
     end)
 
     local PageService: UIPageLayout = Library:Create("UIPageLayout", {
-        Parent = Scale_1
+        Parent = Scale_1,
+        TweenTime = 0.4,
+        EasingStyle = Enum.EasingStyle.Quart,
+        EasingDirection = Enum.EasingDirection.Out
     })
 
     local Window = {}
