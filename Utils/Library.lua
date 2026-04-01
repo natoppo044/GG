@@ -674,9 +674,7 @@ function Library:Window(Args)
 
     local PageService: UIPageLayout = Library:Create("UIPageLayout", {
         Parent = Scale_1,
-        TweenTime = 0.4,
-        EasingStyle = Enum.EasingStyle.Quart,
-        EasingDirection = Enum.EasingDirection.Out
+        Animated = false
     })
 
     local Window = {}
@@ -2147,12 +2145,12 @@ function Library:Window(Args)
         Library:Draggable(Background_1) 
 
         PageService.HorizontalAlignment = Enum.HorizontalAlignment.Left
-        PageService.EasingStyle = Enum.EasingStyle.Exponential
-        PageService.TweenTime = 0.5
         
         PageService.GamepadInputEnabled = false
         PageService.ScrollWheelInputEnabled = false
         PageService.TouchInputEnabled = false
+        PageService.Animated = false
+        PageService.TweenTime = 0
         
         Library.PageService = PageService
 
