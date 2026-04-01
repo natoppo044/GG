@@ -679,12 +679,13 @@ function Library:Window(Args)
     })
 
     local function FadePage(targetPage)
-        local FadeTweenOut = TweenService:Create(Scale_1, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {GroupTransparency = 1})
-        local FadeTweenIn = TweenService:Create(Scale_1, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {GroupTransparency = 0})
+        local FadeTweenOut = TweenService:Create(Scale_1, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {GroupTransparency = 1})
+        local FadeTweenIn = TweenService:Create(Scale_1, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {GroupTransparency = 0})
         
         FadeTweenOut:Play()
         FadeTweenOut.Completed:Once(function()
             PageService:JumpTo(targetPage)
+            task.wait(0.05) -- ให้เวลาระบบจัดการ layout แป๊บเดียว
             FadeTweenIn:Play()
         end)
     end
