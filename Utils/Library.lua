@@ -600,7 +600,7 @@ function Library:Window(Args)
     
 
     -- Scale (body)
-    local Scale_1 = Library:Create("Frame", {
+    local Scale_1 = Library:Create("CanvasGroup", {
         Name = "Scale",
         Parent = Background_1,
         AnchorPoint = Vector2.new(0, 1),
@@ -609,7 +609,8 @@ function Library:Window(Args)
         BorderColor3 = Color3.fromRGB(0, 0, 0),
         BorderSizePixel = 0,
         Position = UDim2.new(0, 0, 1, 0),
-        Size = UDim2.new(1, 0, 1, -40)
+        Size = UDim2.new(1, 0, 1, -40),
+        GroupTransparency = 0
     })
 
     local Home_1 = Library:Create("Frame", {
@@ -676,6 +677,17 @@ function Library:Window(Args)
         Parent = Scale_1,
         Animated = false
     })
+
+    local function FadePage(targetPage)
+        local FadeTweenOut = TweenService:Create(Scale_1, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {GroupTransparency = 1})
+        local FadeTweenIn = TweenService:Create(Scale_1, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {GroupTransparency = 0})
+        
+        FadeTweenOut:Play()
+        FadeTweenOut.Completed:Once(function()
+            PageService:JumpTo(targetPage)
+            FadeTweenIn:Play()
+        end)
+    end
 
     local Window = {}
 
@@ -901,7 +913,7 @@ function Library:Window(Args)
 
             Return_1.Visible = true
 
-            PageService:JumpTo(NewPage)
+            FadePage(NewPage)
         end
 
         local Page = {}
@@ -2171,7 +2183,7 @@ function Library:Window(Args)
                 }
             }):Play()
 
-            PageService:JumpTo(Home_1)
+            FadePage(Home_1)
         end
         
         do
