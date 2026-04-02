@@ -41,13 +41,13 @@ Quest.JungleQuest = {
 
 Quest.BuggyQuest1 = {
     {
-        ["LevelReq"] = 30,
+        ["LevelReq"] = 35,
         ["Name"] = "Pirates",
         ["Task"] = { ["Pirate"] = 8 },
         ["Reward"] = { ["Beli"] = 3000, ["Exp"] = 13000 }
     },
     {
-        ["LevelReq"] = 40,
+        ["LevelReq"] = 45,
         ["Name"] = "Brute",
         ["Task"] = { ["Brute"] = 8 },
         ["Reward"] = { ["Beli"] = 3500, ["Exp"] = 22000 }
