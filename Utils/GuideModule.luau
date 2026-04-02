@@ -3,7 +3,7 @@ return {
         {
             NPCName = "Pirate Adventurer",
             InternalQuestName = "BuggyQuest1",
-            Levels = {30, 40, 55},
+            Levels = {30, 45, 55},
             Position = Vector3.new(-1141.074951171875, 4.100006103515625, 3831.550048828125)
         },
         {
