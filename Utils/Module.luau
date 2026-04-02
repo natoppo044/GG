@@ -271,56 +271,45 @@ AddModule("Parallels", function()
         end
 
         local function RunQueue(Options)
-            local Success, ErrorMessage = pcall(function()
-                local function GetQueue()
-                    for _, Option in Options do
+			while task.wait((Settings and not Settings['Smooth Mode']) and 0 or 1) do
+				
+				local Found = false
 
-                        _ENV.RunningOption = Option.Name
+				for _, Option in ipairs(Options) do
 
-                        local Method = Option.Function()
+					if Option and Option.Function then
 
-                        if Method then
-                            if type(Method) == "string" then
-                                _ENV.RunningMethod = Method
-                            end
+						_ENV.RunningOption = Option.Name
 
-                            return Method
-                        end
-                    end
+						local Success, Method = pcall(function()
+							return Option.Function()
+						end)
 
-                    _ENV.RunningOption, _ENV.RunningMethod = nil, nil
-                end
+						if Success and Method then
+							if type(Method) == "string" then
+								_ENV.RunningMethod = Method
+							end
 
-                while task.wait(not Settings['Smooth Mode'] and 0 or 1) do
-                    _ENV.OnFarm = if GetQueue() then true else false
-                end
-            end)
+							Found = true
+							break
+						end
 
-            if not Success then
-                ShowErrorMessage(ErrorMessage)
-                warn(ErrorMessage)
+						if not Success then
+							warn("[Farm Error]", Option.Name, Method)
+						end
 
-                task.delay(5, function()
-                    if _ENV.error_message then
-                        _ENV.error_message.Text = "- natoppo044 Model -\nStart Refresh Options ..."
+					end
 
-                        task.wait(2)
+				end
 
-                        if _ENV.RunningOption and Fallback[_ENV.RunningOption] then
-                            Fallback[_ENV.RunningOption].Value = false
-                            _ENV.error_message.Text = "- natoppo044 Model -\nHas been Disabled " .. _ENV.RunningOption
-                        end
+				if not Found then
+					_ENV.RunningOption = nil
+					_ENV.RunningMethod = nil
+				end
 
-                        task.wait(2)
-
-                        _ENV.error_message:Destroy()
-                        _ENV.error_message = nil
-
-                        task.spawn(RunQueue, FarmFunctions)
-                    end
-                end)
-            end
-        end
+				_ENV.OnFarm = Found
+			end
+		end
 
         local function UpdateEnabledOptions()
             table.clear(FarmFunctions)
