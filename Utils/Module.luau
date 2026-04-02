@@ -271,45 +271,56 @@ AddModule("Parallels", function()
         end
 
         local function RunQueue(Options)
-			while task.wait((Settings and not Settings['Smooth Mode']) and 0 or 1) do
-				
-				local Found = false
+            local Success, ErrorMessage = pcall(function()
+                local function GetQueue()
+                    for _, Option in Options do
 
-				for _, Option in ipairs(Options) do
+                        _ENV.RunningOption = Option.Name
 
-					if Option and Option.Function then
+                        local Method = Option.Function()
 
-						_ENV.RunningOption = Option.Name
+                        if Method then
+                            if type(Method) == "string" then
+                                _ENV.RunningMethod = Method
+                            end
 
-						local Success, Method = pcall(function()
-							return Option.Function()
-						end)
+                            return Method
+                        end
+                    end
 
-						if Success and Method then
-							if type(Method) == "string" then
-								_ENV.RunningMethod = Method
-							end
+                    _ENV.RunningOption, _ENV.RunningMethod = nil, nil
+                end
 
-							Found = true
-							break
-						end
+                while task.wait(not Settings['Smooth Mode'] and 0 or 1) do
+                    _ENV.OnFarm = if GetQueue() then true else false
+                end
+            end)
 
-						if not Success then
-							warn("[Farm Error]", Option.Name, Method)
-						end
+            if not Success then
+                ShowErrorMessage(ErrorMessage)
+                warn(ErrorMessage)
 
-					end
+                task.delay(5, function()
+                    if _ENV.error_message then
+                        _ENV.error_message.Text = "- Antigravity Model -\nStart Refresh Options ..."
 
-				end
+                        task.wait(2)
 
-				if not Found then
-					_ENV.RunningOption = nil
-					_ENV.RunningMethod = nil
-				end
+                        if _ENV.RunningOption and Fallback[_ENV.RunningOption] then
+                            Fallback[_ENV.RunningOption].Value = false
+                            _ENV.error_message.Text = "- Antigravity Model -\nHas been Disabled " .. _ENV.RunningOption
+                        end
 
-				_ENV.OnFarm = Found
-			end
-		end
+                        task.wait(2)
+
+                        _ENV.error_message:Destroy()
+                        _ENV.error_message = nil
+
+                        task.spawn(RunQueue, FarmFunctions)
+                    end
+                end)
+            end
+        end
 
         local function UpdateEnabledOptions()
             table.clear(FarmFunctions)
