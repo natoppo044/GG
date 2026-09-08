@@ -1,7 +1,7 @@
 local _ENV = (getgenv or getrenv or getfenv)()
 
 local Owner = "natoppo044"
-local Repository = GG
+local Repository = "GG"
 
 local IMPORTANT_TAGS = {
     "WorldChest", "SealedEgg", 'BerryBushStreamed', "MapEnvironmentTween", "EasterFullMoonEgg"
