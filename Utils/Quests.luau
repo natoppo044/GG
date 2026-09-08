@@ -842,7 +842,7 @@ Quest.SubmergedQuest3 = {
         ["Reward"] = { ["Beli"] = 15650, ["Exp"] = 154000000 }
     },
     {
-        ["LevelReq"] = 2725,
+        ["LevelReq"] = 2700,
         ["Name"] = "Grand Devotee",
         ["Task"] = { ["Grand Devotee"] = 8 },
         ["Reward"] = { ["Beli"] = 15700, ["Exp"] = 156000000 }
