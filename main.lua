@@ -12,23 +12,8 @@ local function fetch(file)
         "https://raw.githubusercontent.com/%s/%s/main/%s",
         Owner, Repository, file
     )
-    local ok, res = pcall(function()
-        return game:HttpGet(URL)
-    end)
-    if not ok or type(res) ~= "string" or #res == 0 then
-        warn("Fetch failed", URL)
-        return function()
-            return {}
-        end
-    end
-    local ok2, fn = pcall(loadstring, res)
-    if not ok2 or type(fn) ~= "function" then
-        warn("Loadstring failed", URL)
-        return function()
-            return {}
-        end
-    end
-    return fn()
+
+    return loadstring(game:HttpGet(URL))()
 end
 
 local Installer = fetch("Utils/Module.luau")
@@ -2047,7 +2032,7 @@ local Text, Functions = {}, (function()
 end)()
 
 local function NewStateLabel(Form, Name)
-    Text[Name] = Plugins:RightLabel(Form, { Name, "Displays the current status.", "N/A" })
+    Text[Name] = Plugins:RightLabel(Form, { Name, "🖥️ แสดงสถานะปัจจุบัน ✅", "N/A" })
 end
 
 local function AddInventoryEvent(Form, Name, Color)
@@ -2523,10 +2508,10 @@ do
     local Reimagined = Colors("Easter", Color3.fromRGB(255, 170, 0))
     local Updater = Colors("[ 🥚 " .. Reimagined .. " ]", Color3.fromRGB(255, 255, 255))
 
-    local Title = Updater .. " THAI NO 1's official "
-    local Credits = "Made by @THAI NO 1"
+    local Title = Updater .. " 👦🏻 เด็กไทย official"
+    local Credits = "Made by @DEKTHAI"
 
-    local LEVEL_CAP = workspace:GetAttribute('LEVEL_CAP')
+    local LEVEL_CAP = workspace:GetAttribute('LEVEL_CAP') or 3000
 
     local Window = Plugins:Window({
         Title = Title,
@@ -2535,20 +2520,20 @@ do
 
     Plugins:Community()
 
-    local Application = Plugins:NewPage({ "Application", "Application Options", 96487611333794 }) do
+     local Application = Plugins:NewPage({ "ตั้งค่าระบบฟาร์ม", "⚙️ Application Options", 96487611333794 }) do
         Application:Section("Farming") do
             local Weapon = { "Melee", "Sword", "Blox Fruit" }
 
             Default("Select Weapon", "Melee")
             Default("Fast Attack", true)
 
-            Plugins:Dropdown(Application, "Select Weapon", Weapon, "Select Weapon")
+            Plugins:Dropdown(Application, "เลือกอาวุธ", Weapon, "Select Weapon")
 
-            Plugins:Toggle(Application, { "Fast Attack", "Attacking at a high speed with extended range" }, "Fast Attack")
+            Plugins:Toggle(Application, { "Fast Attack", "โจมตีด้วยความเร็วสูง พร้อมเพิ่มระยะการโจมตีให้ไกลขึ้น ⚡🗡️" }, "Fast Attack")
 
-            Plugins:Toggle(Application, { "Can Attack Players", "Fast Attack can hit other players." }, "Attack Players")
+            Plugins:Toggle(Application, { "โจมตีผู้เล่นที่แย่งฟาร์ม", "Fast Attack can hit other players." }, "Attack Players")
 
-            Plugins:Button(Application, { "Improve Fast Attack", "Lets a player fix fast attack if not working." }, function()
+            Plugins:Button(Application, { "ปรับปรุงการโจมตีเร็ว Improve Fast Attack", "ผู้เล่นสามารถกดแก้ไขได้ ถ้าหากตีเร็วมันไม่ทำงาน (Lets a player fix fast attack if not working)" }, function()
                 task.spawn(function()
                     loadstring([[
                         local Players = game:GetService("Players")
@@ -2668,18 +2653,18 @@ end)
         Application:Section("Tweening") do
             Default("Wait Enemies Delay", 0.75)
 
-            Plugins:Toggle(Application, { "Quick Teleport", "Quickly teleports when the target is within 250 meters." }, "Dodge Position")
+            Plugins:Toggle(Application, { "Quick Teleport", "วาร์ปไปยังเป้าหมายอย่างรวดเร็ว เมื่อเป้าหมายอยู่ในระยะ 250 เมตร." }, "Dodge Position")
 
-            Plugins:Slider(Application, "Wait Enemies Delay", { 0.5, 1, 2 }, "Wait Enemies Delay")
+            Plugins:Slider(Application, "หน่วงเวลารอศัตรู” หรือ “เวลาหน่วงในการรอศัตรู", { 0.5, 1, 2 }, "Wait Enemies Delay")
         end
 
         Application:Section("Pulling") do
             Default("Enabled Bring", true)
             Default("Bring Distance", 300)
 
-            Plugins:Toggle(Application, { "Pulls Enemies", "Pulls nearby enemies toward you." }, "Enabled Bring")
+            Plugins:Toggle(Application, { "Pulls Enemies", "ดึงศัตรู — ดึงศัตรูที่อยู่ใกล้ให้เข้ามาหา 🧲" }, "Enabled Bring")
 
-            Plugins:Slider(Application, "Pulls Range", { 150, 350 }, "Bring Distance")
+            Plugins:Slider(Application, "ระยะห่างการดึง", { 150, 350 }, "Bring Distance")
         end
 
         Application:Section("Skilling") do
@@ -2698,17 +2683,17 @@ end)
         end
 
         Application:Section("Options") do
-            Plugins:Toggle(Application, { "Disable Notifications", "Turns off game notifications such as EXP and money gains." }, "Disable Notification", function(value)
+            Plugins:Toggle(Application, { "Disable Notifications", "ปิดการแจ้งเตือน — ปิดข้อความแจ้งเตือนในเกม เช่น การได้รับ EXP และเงิน 🔕" }, "Disable Notification", function(value)
                 PlayerGui.Notifications.Enabled = not value
             end)
 
-            Plugins:Toggle(Application, { "Set Spawn Point", "Automatically sets your spawn point to the current island." }, "Force Spawn Point")
+            Plugins:Toggle(Application, { "Set Spawn Point", "เชฟจุดเกิด (Spawn) ของคุณไปที่เกาะปัจจุบันโดยอัตโนมัติ 🌴" }, "Force Spawn Point")
 
-            Plugins:Toggle(Application, { "Activated Race V3", "Automatically activates Race V3." }, "V3")
+            Plugins:Toggle(Application, { "Activated Race V3", "เปิดใช้งานเผ่า V3 โดยอัตโนมัติ ⚡" }, "V3")
 
-            Plugins:Toggle(Application, { "Activated Race V4", "Automatically activates Race V4." }, "V4")
+            Plugins:Toggle(Application, { "Activated Race V4", "เปิดใช้งานเผ่า V4 โดยอัตโนมัติ ⚡" }, "V4")
 
-            Plugins:Toggle(Application, { "Walk On Water", "Allows you to walk on water." }, "Walk On Water", function(value)
+            Plugins:Toggle(Application, { "Walk On Water", "Water Walk — เปิดใช้งานการเดินบนน้ำ 🌊" }, "Walk On Water", function(value)
                 if value then
                     Map["WaterBase-Plane"].Size = Vector3.new(Map["WaterBase-Plane"].Size.X, 165, Map["WaterBase-Plane"].Size.Z)
                 else
@@ -2718,16 +2703,16 @@ end)
         end
     end
 
-    local Standard = Plugins:NewPage({ "Standard", "Standard Options", 89366688240346 }) do
+    local Standard = Plugins:NewPage({ "ออโต้ฟาร์มเวลตัน", "💎 Standard Options", 89366688240346 }) do
         Standard:Section("Leveling") do
             Default("Adaptive Update", true)
 
-            Plugins:Toggle(Standard, { "Auto Farm Level", "Farm levels from 1 – ".. LEVEL_CAP }, "Level")
+            Plugins:Toggle(Standard, { "⏰ Auto Farm Level", "Farm levels from 1 – ".. LEVEL_CAP }, "Level")
 
             Plugins:Toggle(Standard, { "Adaptive Update", "Uses latest level data from the game." }, "Adaptive Update")
         end
 
-        Standard:Section("Stats") do
+        Standard:Section("ค่าสเตตัส") do
             local Stats = {
                 "Melee", "Defense",
                 "Sword", "Gun",
@@ -2738,13 +2723,13 @@ end)
 
             Plugins:Dropdown(Standard, "Select Stats", Stats, "Select Stats")
 
-            Plugins:Toggle(Standard, { "Auto Upgrade Stats", "Automatically upgrades stats as you level up." }, "Upgrade Stats")
+            Plugins:Toggle(Standard, { "อัปค่าสเตตัสอัตโนมัติ", "Automatically upgrades stats as you level up." }, "Upgrade Stats")
 
-            Plugins:Button(Standard, { "Refund Stats", "Lets a player reset and reallocate their stat points." }, function()
+            Plugins:Button(Standard, { "รีเซ็ตค่าสเตตัส", "Lets a player reset and reallocate their stat points." }, function()
                 Module:ComF("BlackbeardReward", "Refund", "2")
             end)
 
-            Plugins:Button(Standard, { "Race Reroll", "Lets a player randomly change their current race" }, function()
+            Plugins:Button(Standard, { "🎲 สุ่มเผ่าใหม่ — เปลี่ยนเผ่าปัจจุบันแบบสุ่ม", "Lets a player randomly change their current race" }, function()
                 Module:ComF("BlackbeardReward", "Reroll", "2")
             end)
         end
@@ -2753,45 +2738,45 @@ end)
             Settings['Second Sea'] = false
             Settings['Third Sea'] = false
 
-            Plugins:Toggle(Standard, { "Auto Second Sea", "Defeat the ice admiral at frozen village to complete quest." }, "Second Sea")
+            Plugins:Toggle(Standard, { "🌊ออโต้ทะเล 2", "❄️ กำจัด Ice Admiral ที่ Frozen Village เพื่อทำเควสให้สำเร็จ ⚔️🏝️" }, "Second Sea")
 
-            Plugins:Toggle(Standard, { "Auto Third Sea", "Completes second Sea quest, kill don swan, trevor’s 1M+ fruit, and rip_indra." }, "Third Sea")
+            Plugins:Toggle(Standard, { "🌊ออโต้ทะเล 3", "ทำเควสทะเลที่สองให้สำเร็จอัตโนมัติ, kill don swan, trevor’s 1M+ fruit, and rip_indra." }, "Third Sea")
         end 
 
         Standard:Section("Enemies") do
-            Plugins:Toggle(Standard, { "Auto Farm Nearest", "Farm nearest enemies in 1000 m." }, "Nearest")
+            Plugins:Toggle(Standard, { "⚔️ ฟาร์มศัตรูที่ใกล้ที่สุดอัตโนมัติ", "📍 โจมตีและฟาร์มศัตรูที่อยู่ใกล้ที่สุดภายในระยะ 1000 เมตรอัตโนมัติ ⚡" }, "Nearest")
 
-            Plugins:Toggle(Standard, { "Nearest Execution", "Instant kill nearest enemies in 300 m." }, "Nearest Execution")
+            Plugins:Toggle(Standard, { "💀 สังหารศัตรูที่ใกล้ที่สุด", "⚡ กำจัดศัตรูที่อยู่ใกล้ที่สุดในระยะ 300 เมตรทันที 🗡️" }, "Nearest Execution")
         end
 
         Standard:Section("Bosses") do
             Default("Select Boss", { BossesModule[1], BossesModule[2] })
 
-            Plugins:Dropdown(Standard, "Select Boss", BossesModule, 'Select Boss')
+            Plugins:Dropdown(Standard, "✨ เลือกบอส 👑💥", BossesModule, 'Select Boss')
 
-            Plugins:Toggle(Standard, { "Kill Target Boss", "Farms the target boss when it spawns." }, "Target Boss")
+            Plugins:Toggle(Standard, { "💀KILL BOSS ตีบอสออโต้", "ฟาร์มบอสเป้าหมายทันทีที่มันปรากฏ ⚔️🕹️" }, "Target Boss")
         end
     end
 
-    local Automatic = Plugins:NewPage({ "Automatic", "Automatic Options", 121366445504981 }) do
+    local Automatic = Plugins:NewPage({ "ออโต้ฟาร์มเควส", "📝 ฟาร์มกระดูก,ตีบอสทั่วไป", 121366445504981 }) do
         Automatic:Section("Events") do
-            Plugins:Toggle(Automatic, { "Auto Pirate Raid", "Clear pirate raid, spawn every 1 hour 15 mins." }, 'Pirate Raid')
+            Plugins:Toggle(Automatic, { "🏴‍☠️ Auto Pirate Raid", "Clear pirate raid, spawn every 1 hour 15 mins." }, 'Pirate Raid')
 
-            Plugins:Toggle(Automatic, { "Auto Factory Raid", "Destroy factory raid, spawn every 2 hous." }, 'Factory')
+            Plugins:Toggle(Automatic, { "ปล้นโรงงานอัตโนมัติ 🏭⚡", "Destroy factory raid, spawn every 2 hous." }, 'Factory')
         end
 
         Automatic:Section("Bones") do
             AddInventoryEvent(Automatic, "Bones")
 
-            Plugins:Toggle(Automatic, { "Auto Farm Bone", "Farms enemies that drop bones." }, 'Bone')
+            Plugins:Toggle(Automatic, { "⚔️🦴ฟาร์มกระดูกอัตโนมัติ", "Farms enemies that drop bones." }, 'Bone')
 
-            Plugins:Toggle(Automatic, { "Random Surprise", "Random bone to get rewards." }, 'Random Surprise')
+            Plugins:Toggle(Automatic, { "🎁 สุ่มกระดูกอัตโนมัติ", "Random bone to get rewards." }, 'Random Surprise')
         end
 
         Automatic:Section("Elite") do
             NewStateLabel(Automatic, "Elite")
 
-            Plugins:Toggle(Automatic, { "Auto Elite", "Get quest and kill elite." }, 'Elite')
+            Plugins:Toggle(Automatic, { "Auto Elite", "📜 รับเควสและฆ่า Elite 🗡️" }, 'Elite')
         end
 
         Automatic:Section("Cake Prince") do
@@ -2799,37 +2784,37 @@ end)
             NewStateLabel(Automatic, "Cake Prince")
             NewStateLabel(Automatic, "Dough King")
 
-            Plugins:Toggle(Automatic, { "Auto Cake Prince", "Kill 500 enemies and summon boss." }, 'Cake Prince') 
+            Plugins:Toggle(Automatic, { "🤴Auto Cake Prince", "⚔️ ฆ่าศัตรู 500 ตัว แล้วเรียกบอส 👑🔥" }, 'Cake Prince') 
 
-            Plugins:Toggle(Automatic, { "Auto Dough King", "Find sweet chalice, kill enemies and summon boss." }, 'Dough King') 
+            Plugins:Toggle(Automatic, { "🍩Auto Dough King", "Find sweet chalice, kill enemies and summon boss." }, 'Dough King') 
         end
     end
 
-    local Items = Plugins:NewPage({ "Items", "Items Options", 98969437843417 }) do
+    local Items = Plugins:NewPage({ "ฟาร์มไอเทม", "🥚️ Items Options", 98969437843417 }) do
         Items:Section("Collectable") do
-            Plugins:Toggle(Items, { "Auto Collect Egg", "Collects all eggs." }, "Egg")
+            Plugins:Toggle(Items, { "🥚 เก็บไข่อัตโนมัติ", "Collects all eggs." }, "Egg")
 
-            Plugins:Toggle(Items, { "Auto Collect Berry", "Collects all berries." }, "Berry")
+            Plugins:Toggle(Items, { "🍓 เก็บเบอร์รี่อัตโนมัติ", "Collects all berries." }, "Berry")
 
-            Plugins:Toggle(Items, { "Auto Collect Chest", "Collects all chests." }, "Chest")
+            Plugins:Toggle(Items, { "💰 เก็บหีบอัตโนมัติ", "Collects all chests." }, "Chest")
         end
 
         Items:Section("Fruit") do
-            Plugins:Toggle(Items, { "Auto Collect Fruit", "Collects all devil fruits." }, "Collect Fruit")
+            Plugins:Toggle(Items, { "🍎🤖 เก็บผลปีศาจอัตโนมัติ", "Collects all devil fruits." }, "Collect Fruit")
 
-            Plugins:Toggle(Items, { "Auto Random Fruit", "Random fruits every 60s." }, 'Random Fruit')
+            Plugins:Toggle(Items, { "🎲 สุ่มผลปีศาจโดยอัตโนมัติ", "Random fruits every 60s." }, 'Random Fruit')
 
-            Plugins:Toggle(Items, { "Auto Store Fruit", "Stores all fruits to backpack." }, 'Store Fruit')
+            Plugins:Toggle(Items, { "🏪 เก็บผลปีศาจเข้าคลังอัตโนมัติ", "Stores all fruits to backpack." }, 'Store Fruit')
 
-            Plugins:Button(Items, { "Random Fruit", "Lets a player randomly devil fruits." }, function()
+            Plugins:Button(Items, { "✨ สุ่มผลปีศาจ", "Lets a player randomly devil fruits." }, function()
                 Module:ComF("Cousin", "Buy")
             end)
 
-            Plugins:Button(Items, { "Normal Stock", "Lets a player open devil fruits shop." }, function()
+            Plugins:Button(Items, { "📦 Normal Stock", "🛒 กดเพื่อซื้อผลปีศาจ Lets a player open devil fruits shop." }, function()
                 _ENV.OPENSTOCK()
             end)
 
-            Plugins:Button(Items, { "Advanced Stock", "Lets a player open devil fruits shop." }, function()
+            Plugins:Button(Items, { "📦 Advanced Stock", "🛒 กดเพื่อซื้อผลปีศาจ Lets a player open devil fruits shop." }, function()
                 _ENV.OPENSTOCK(true)
             end)
         end
@@ -2837,14 +2822,14 @@ end)
         Items:Section("Material") do
             Default('Select Material', DataModule['Material List'][1])
 
-            Plugins:Dropdown(Items, 'Select Material', DataModule['Material List'], 'Select Material')
-            Plugins:Toggle(Items, { "Auto Farm Material", "Farms enemies that drop the selected material." }, 'Material')
+            Plugins:Dropdown(Items, '🔧 เลือกวัตถุดิบ', DataModule['Material List'], 'Select Material')
+            Plugins:Toggle(Items, { "🛠️ ออโต้ฟาร์มวัตถุดิบ ", "Farms enemies that drop the selected material." }, 'Material')
         end
     end
 
-    local Dungeon = Plugins:NewPage({ "Dungeon", "Dungeon Options", 71085907390638 }) do
+    local Dungeon = Plugins:NewPage({ "ลงดันเจี้ยน", "🏰 Dungeon Options", 71085907390638 }) do
         Dungeon:Section("Order") do
-            Plugins:Toggle(Dungeon, { "Automatic Law Raid", "Buy chip and kill law the order." }, 'Law')
+            Plugins:Toggle(Dungeon, { "⚔️ Automatic Law Raid", "💳 Buy chip and kill law the order." }, 'Law')
         end
 
         Dungeon:Section("Dungeon") do
@@ -2866,25 +2851,25 @@ end)
         end
     end
 
-    local Equipment = Plugins:NewPage({ "Equipment", "Equipment Options", 111489723544340 }) do
+    local Equipment = Plugins:NewPage({ "ทำอาวุธ", "⚒️ Equipment Options", 111489723544340 }) do
         Equipment:Section("Dealer") do
-            Plugins:Toggle(Equipment, { "Auto True Triple Katana", "Waits for the Legendary Sword Dealer to spawn and automatically buys all required katanas." }, 'True Tripple Katana')
+            Plugins:Toggle(Equipment, { "Auto True Triple Katana", "⏳ รอให้พ่อค้า Legendary Sword ปรากฏ แล้วซื้อคาตาน่าที่จำเป็นทั้งหมดอัตโนมัติ 🗡️✨" }, 'True Tripple Katana')
 
-            Plugins:Toggle(Equipment, { "Auto Haki Colors", "Waits for the Master of Auras (Haki Colors Dealer) and automatically buys available haki colors." }, 'Haki Colors')
+            Plugins:Toggle(Equipment, { "Auto Haki Colors", "⏳ รอ Master of Auras (พ่อค้าสี Haki) ปรากฏ แล้วซื้อสี Haki ที่มีทั้งหมดอัตโนมัติ 🖌" }, 'Haki Colors')
         end
 
         Equipment:Section("Sword") do
-            Plugins:Toggle(Equipment, { "Auto Saber", "Automatically completes puzzle torch, defeats Mob Leader, and relic quest." }, 'Saber')
+            Plugins:Toggle(Equipment, { "🗡️ ออโต้ทำดาบ Saber อัตโนมัติ", "Automatically completes puzzle torch, defeats Mob Leader, and relic quest." }, 'Saber')
 
-            Plugins:Toggle(Equipment, { "Auto Yama", "Defeats Elite Pirates until reaching the required amount and attempts to obtain the Yama sword." }, 'Yama')
+            Plugins:Toggle(Equipment, { "🛡️ ออโต้ทำดาบ Yama อัตโนมัติ", "Defeats Elite Pirates until reaching the required amount and attempts to obtain the Yama sword." }, 'Yama')
 
-            Plugins:Toggle(Equipment, { "Auto Tushita", "Spawns Rip_Indra, lights all torches, and defeats Longma to obtain Tushita." }, 'Tushita')
+            Plugins:Toggle(Equipment, { "⚔️ ออโต้ทำดาบ Tushita อัตโนมัติ", "Spawns Rip_Indra, lights all torches, and defeats Longma to obtain Tushita." }, 'Tushita')
 
-            Plugins:Toggle(Equipment, { "[ BETA ] Auto Cursed Dual Katana", "Completes the Heaven and Hell trials." }, 'Cursed Duel Katana')
+            Plugins:Toggle(Equipment, { "[🔥ยังไม่เสร็จ!]  ออโต้ทำดาบ Cursed Dual Katana อัตโนมัติ", "Completes the Heaven and Hell trials." }, 'Cursed Duel Katana')
         end
     end
 
-    local SeaEvent = Plugins:NewPage({ "Sea Events", "Sea Event Options", 102432461962788 }) do
+    local SeaEvent = Plugins:NewPage({ "ออโต้ทะเล!", "🌊 Sea Event Options", 102432461962788 }) do
         SeaEvent:Section("Skill") do
             Plugins:Button(SeaEvent, { Colors("From s1nve", Color3.fromRGB(255, 0, 127)), "Click for back to the <b><font color=\"rgb(255, 170, 0)\">(Application > Skilling)</font></b> page and select skill." }, function()
                 Library.PageService:JumpToIndex(2)
@@ -2943,11 +2928,11 @@ end)
         end
     end
 
-    local Spacial = Plugins:NewPage({ "Spacial", "Spacial Options", 114944379706502 }) do
+    local Spacial = Plugins:NewPage({ "Spacial", "🗻🔥 Spacial Options", 114944379706502 }) do
         Spacial:Section("Shrine") do
             NewStateLabel(Spacial, "Shrine")
 
-            Plugins:Toggle(Spacial, { "Auto Shrine", "Fully find kitsune shrine collect orb and trade." }, 'Kitsune Shrine')
+            Plugins:Toggle(Spacial, { "🗡️ Auto Shrine", "Fully find kitsune shrine collect orb and trade." }, 'Kitsune Shrine')
         end
 
         Spacial:Section("Volcano") do
@@ -2957,7 +2942,7 @@ end)
                 Library.PageService:JumpToIndex(2)
             end)
 
-            Plugins:Toggle(Spacial, { "Auto Volcano", "Fully find volcano, patch event, collect bone and egg." }, 'Prehistoric')
+            Plugins:Toggle(Spacial, { "🔥 Auto Volcano", "Fully find volcano, patch event, collect bone and egg." }, 'Prehistoric')
 
             Plugins:Button(Spacial, { "Remove Lava", "Removes lava to safe user." }, function()
                 pcall(function()
@@ -2981,15 +2966,15 @@ end)
         Spacial:Section("Mirage") do
             NewStateLabel(Spacial, "Mirage Island")
 
-            Plugins:Toggle(Spacial, { "Auto Mirage Island", "Fully find mirage island and collect chest." }, 'Mirage Island')
+            Plugins:Toggle(Spacial, { "🏝️✨ Auto Mirage Island (ออโต้เกาะมิเรจ)", "Fully find mirage island and collect chest." }, 'Mirage Island')
 
-            Plugins:Toggle(Spacial, { "Auto Collect Gears", "Collect gears in mirage island." }, 'Collect Gears')
+            Plugins:Toggle(Spacial, { "⚙️✨ Auto Collect Gears (เก็บเกียร์อัตโนมัติ)", "Collect gears in mirage island." }, 'Collect Gears')
 
             Plugins:Toggle(Spacial, { "Auto Look Moon", "Look moon in mirage island." }, 'Look Moon')
 
-            Plugins:Toggle(Spacial, { "Find Advance Dealer", "Teleport to advance dealer." }, 'Advance Dealer')
+            Plugins:Toggle(Spacial, { "👀 Find Advance Dealer", "Teleport to advance dealer." }, 'Advance Dealer')
 
-            Plugins:Button(Spacial, { "Remove Fog", "Remove dark fog from mirage island." }, function()
+            Plugins:Button(Spacial, { "🗺️ Remove Fog (ลบหมอกอัตโนมัติ)", "Remove dark fog from mirage island." }, function()
                 task.spawn(pcall, function()
                     Lighting.LightingLayers.MirageFog:Destroy()
                 end)
@@ -2997,7 +2982,7 @@ end)
         end
     end
 
-    local Visual = Plugins:NewPage({ "Visual", "Visual Options", 113843981805131 }) do
+    local Visual = Plugins:NewPage({ "Visual", "🌈 Visual Options", 113843981805131 }) do
 
     end
 
